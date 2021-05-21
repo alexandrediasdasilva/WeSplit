@@ -17,15 +17,24 @@ struct ContentView: View {
     
     var body: some View {
         
-        Form {
-            Section {
-                TextField("Placeholder", text: $billAmount)
-                    .keyboardType(.decimalPad)
+        NavigationView {
+            Form {
+                Section {
+                    TextField("Montant de l'addition", text: $billAmount)
+                        .keyboardType(.decimalPad)
+                    
+                    Picker("Nombre de personnes", selection: $numberOfPeople) {
+                        ForEach(2 ..< 100) {
+                            Text("\($0) personnes")
+                        }
+                    }
+                }
+                
+                Section {
+                    Text("\(billAmount) €")
+                }
             }
-            
-            Section {
-                Text("\(billAmount) €")
-            }
+            .navigationBarTitle("WeSplit")
         }
         
     }

@@ -15,15 +15,18 @@ struct ContentView: View {
     
     let tipPercentages = [0, 10, 15, 20, 25]
     
-    var totalPerPerson: Double {
-        let peopleCount = Double(numberOfPeople + 2)
+    var grandTotal: Double {
         let tipSelection = Double(tipPercentages[tipPercentage])
         let orderAmount = Double(billAmount) ?? 0
 
         let tipValue = orderAmount * tipSelection / 100
         let grandTotal = orderAmount + tipValue
+        return grandTotal
+    }
+    
+    var totalPerPerson: Double {
+        let peopleCount = Double(numberOfPeople + 2)
         let amountPerPerson = grandTotal / peopleCount
-
         return amountPerPerson
     }
     
@@ -40,6 +43,7 @@ struct ContentView: View {
                             Text("\($0) personnes")
                         }
                     }
+                    
                 }
                 
                 Section(header: Text("Combien de pourboire laisser ?")) {
@@ -51,9 +55,15 @@ struct ContentView: View {
                     .pickerStyle(SegmentedPickerStyle())
                 }
                 
-                Section {
+                Section(header: Text("Montant par personne")) {
                     Text("\(totalPerPerson, specifier: "%.2f") €")
                 }
+                
+                // Add another section showing the total amount for the check – i.e., the original amount plus tip value, without dividing by the number of people.
+                Section {
+                    Text("Montant total : \(grandTotal, specifier: "%.2f") €")
+                }
+
                 
             }
             .navigationBarTitle("WeSplit")

@@ -30,6 +30,15 @@ struct ContentView: View {
                     }
                 }
                 
+                Section(header: Text("Combien de pourboire voulez-vous laisser ?")) {
+                    Picker("Pourcentage du pourboire", selection: $tipPercentage) {
+                        ForEach(0 ..< tipPercentages.count) {
+                            Text("\(tipPercentages[$0])%")
+                        }
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                }
+                
                 Section {
                     Text("\(billAmount) €")
                 }

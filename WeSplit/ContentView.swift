@@ -8,9 +8,26 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var billAmount = ""
+    @State private var numberOfPeople = 2
+    @State private var tipPercentage = 2
+    
+    let tipPercentages = [10, 15, 20, 25, 0]
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        
+        Form {
+            Section {
+                TextField("Placeholder", text: $billAmount)
+                    .keyboardType(.decimalPad)
+            }
+            
+            Section {
+                Text("\(billAmount) €")
+            }
+        }
+        
     }
 }
 
